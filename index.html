@@ -1,0 +1,53 @@
+<html>
+
+<head>
+
+    <script src="BookCipher.js" type="text/javascript"></script>
+    <script>
+        function decrypt() {
+            try {
+                var cipher = document.getElementById("cipher").value;
+                var key = document.getElementById("key").value;
+                var bookCipher = new BookCipher();
+                var plain = bookCipher.decrypt(key, cipher);
+                document.getElementById("plain").value = plain;
+            }
+            catch (error) {
+                document.getElementById("error").innerText = error;
+            }
+        };
+
+        function encrypt() {
+            var plain = document.getElementById("plain").value;
+            var key = document.getElementById("key").value;
+            var bookCipher = new BookCipher();
+            var cipher = bookCipher.encrypt(plain, key);
+            document.getElementById("cipher").value = cipher;
+        };
+
+    </script>
+</head>
+
+<body>
+    <h1>Book Cipher</h1>
+
+    <h3>cipher</h3>
+    <textarea id="cipher" rows="6"
+        cols="100">136 67 12 186 127 24 125 181 42 51 132 109 57 115 101 129 176 76 135 100 138 94 6 156 169 67 133 96 130 175 161 16 118 81 130 17 158 126 149</textarea>
+
+    <h3>key</h3>
+    <textarea id="key" rows="20" cols="100"></textarea>
+
+    <h3>plain</h3>
+    <textarea id="plain" rows="6" cols="100"></textarea>
+
+    <h3>Commands</h3>
+    <button onclick="decrypt()">Decrypt</button>
+    <!-- <button onclick="decrypt()">Encrypt</button> -->
+    <div>
+        <span id="error" style="color: red;"></span>
+    </div>
+
+</body>
+
+</html>
