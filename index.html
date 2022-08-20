@@ -9,21 +9,19 @@
                 var cipher = document.getElementById("cipher").value;
                 var key = document.getElementById("key").value;
                 var bookCipher = new BookCipher();
-                var plain = bookCipher.decrypt(key, cipher);
-                document.getElementById("plain").value = plain;
+
+                var plainChar = bookCipher.decryptAsChar(key, cipher);
+                document.getElementById("plainChar").value = plainChar;
+
+                var plainWord = bookCipher.decryptAsWord(key, cipher);
+                document.getElementById("plainWord").value = plainWord;
             }
             catch (error) {
                 document.getElementById("error").innerText = error;
             }
         };
 
-        function encrypt() {
-            var plain = document.getElementById("plain").value;
-            var key = document.getElementById("key").value;
-            var bookCipher = new BookCipher();
-            var cipher = bookCipher.encrypt(plain, key);
-            document.getElementById("cipher").value = cipher;
-        };
+      
 
     </script>
 </head>
@@ -39,8 +37,8 @@
     <textarea id="key" rows="20" cols="100"></textarea>
 
     <h3>plain</h3>
-    <textarea id="plain" rows="6" cols="100"></textarea>
-
+    <textarea id="plainWord" rows="6" cols="100"></textarea>
+    <textarea id="plainChar" rows="6" cols="100"></textarea> 
     <h3>Commands</h3>
     <button onclick="decrypt()">Decrypt</button>
     <!-- <button onclick="decrypt()">Encrypt</button> -->
