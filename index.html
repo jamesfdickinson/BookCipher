@@ -5,23 +5,36 @@
     <script src="BookCipher.js" type="text/javascript"></script>
     <script>
         function decrypt() {
+
+            var cipher = document.getElementById("cipher").value;
+            var key = document.getElementById("key").value;
+            var bookCipher = new BookCipher();
+
+            //results
+            let results = [];
             try {
-                var cipher = document.getElementById("cipher").value;
-                var key = document.getElementById("key").value;
-                var bookCipher = new BookCipher();
+                var plainCharCount = bookCipher.decryptAsCharCount(key, cipher);
+                results.push(plainCharCount);
+
+                var plainCharCountIgnoreWhiteSpace = bookCipher.decryptAsCharCountIgnoreWhiteSpace(key, cipher);
+                results.push(plainCharCountIgnoreWhiteSpace);
 
                 var plainChar = bookCipher.decryptAsChar(key, cipher);
-                document.getElementById("plainChar").value = plainChar;
+                results.push(plainChar);
 
-                var plainWord = bookCipher.decryptAsWord(key, cipher);
-                document.getElementById("plainWord").value = plainWord;
+                var decryptAsWord = bookCipher.decryptAsWord(key, cipher);
+                results.push(decryptAsWord);
             }
             catch (error) {
                 document.getElementById("error").innerText = error;
             }
+
+            document.getElementById("results").innerHTML = results.join("<br>-----------------<br>");
+
+
         };
 
-      
+
 
     </script>
 </head>
@@ -34,11 +47,11 @@
         cols="100">136 67 12 186 127 24 125 181 42 51 132 109 57 115 101 129 176 76 135 100 138 94 6 156 169 67 133 96 130 175 161 16 118 81 130 17 158 126 149</textarea>
 
     <h3>key</h3>
-    <textarea id="key" rows="20" cols="100"></textarea>
+    <textarea id="key" rows="20"
+        cols="100">One of our core values at Kodiak is to come as you are and leave better. We believe that eating healthier and enjoying nature helps us to live a little wilder and leave the world a little better. But how? First, it starts with a great breakfast.</textarea>
 
-    <h3>plain</h3>
-    <textarea id="plainWord" rows="6" cols="100"></textarea>
-    <textarea id="plainChar" rows="6" cols="100"></textarea> 
+    <h3>Results</h3>
+    <div id="results"></div>
     <h3>Commands</h3>
     <button onclick="decrypt()">Decrypt</button>
     <!-- <button onclick="decrypt()">Encrypt</button> -->
